@@ -23,7 +23,11 @@ lazy val core = (project in file("core"))
   .enablePlugins(GitBranchPrompt, GitVersioning)
   // TODO: eventually this should be true
   .settings(publishSettings(enabled = false))
-  .settings(libraryDependencies ++= Dependencies.coreLibraries, name := "structured-log4j")
+  .settings(
+    libraryDependencies ++= Dependencies.coreLibraries(scalaVersion.value),
+    name := "structured-log4j",
+    testFrameworks += new TestFramework("utest.runner.Framework")
+  )
 
 lazy val doc = (project in file("doc"))
   .dependsOn(core)
@@ -45,6 +49,10 @@ lazy val doc = (project in file("doc"))
       (paradox in Compile).value
     },
     // properties to be accessible from within the documentation
-    paradoxProperties ++= Map("version" -> version.value),
+    paradoxProperties ++= Map(
+      "group" -> organization.value,
+      "name.core" -> (core / name).value,
+      "version" -> version.value
+    ),
     paradoxTheme := Some(builtinParadoxTheme("generic"))
   )

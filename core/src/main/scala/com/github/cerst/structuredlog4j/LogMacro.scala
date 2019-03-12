@@ -72,6 +72,11 @@ private[structuredlog4j] object LogMacro {
       // matches a '("key", "value")' mdc-entry
       case q"scala.Tuple2.apply[$_, $_]($key, $value)" =>
         q"ThreadContext.put($key, $value)"
+      case otherTree =>
+        c.abort(
+          otherTree.pos,
+          s"""Unsupported mdc (varargs) entry expression '$otherTree'. Use ArrowAssoc (e.g. "foo" -> "bar" ) or Tuple2 (e.g. ("foo", "bar") )"""
+        )
     })
     q"""if ($isEnabled) {
           import org.apache.logging.log4j.ThreadContext

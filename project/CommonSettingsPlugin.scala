@@ -11,6 +11,8 @@ object CommonSettingsPlugin extends CommonSettingsPluginTpl {
     tplProjectSettingsPlus(
       developers := List(Developer("cerst", "Constantin Gerstberger", "", url("https://github.com/cerst"))),
       git.baseVersion := "0.0.0",
+      // basically only needed forsbt-ghpages
+      git.remoteRepo := "git@github.com:cerst/structured-log4j.git",
       headerLicense := Some(HeaderLicense.MIT(startYear.value.get.toString, organizationName.value)),
       homepage := Some(url("https://github.com/cerst/structured-log4j")),
       licenses += "MIT" -> url("https://opensource.org/licenses/MIT"),
@@ -18,9 +20,7 @@ object CommonSettingsPlugin extends CommonSettingsPluginTpl {
       organizationName := "Constantin Gerstberger",
       publishMavenStyle := true,
       resolvers ++= Dependencies.resolvers,
-      scmInfo := Some(
-        ScmInfo(url("https://github.com/cerst/structured-log4j"), "git@github.com:cerst/structured-log4j.git")
-      ),
+      scmInfo := Some(ScmInfo(homepage.value.get, git.remoteRepo.value)),
       startYear := Some(2019)
     )
   }

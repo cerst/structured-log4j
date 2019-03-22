@@ -69,7 +69,6 @@ trait CommonSettingsPluginTpl extends AutoPlugin {
       "-Ywarn-extra-implicit", // Warn when more than one implicit parameter section is defined.
       "-Ywarn-inaccessible", // Warn about inaccessible types in method signatures.
       "-Ywarn-infer-any", // Warn when a type argument is inferred to be `Any`.
-      "-Ywarn-macros:after", // Do not produce warnings for macro-gernated code
       "-Ywarn-nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
       "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
       "-Ywarn-numeric-widen", // Warn when numerics are widened.
